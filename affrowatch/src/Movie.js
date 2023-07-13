@@ -12,7 +12,38 @@ function MovieForm() {
     videoLength: '',
     genre: '',
     status: '',
+    Image: '',
+    release_year: '',
+    age: '',
+    rating: '',
+    length: '',
   });
+
+  const postData = async (url, data) => {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error posting data');
+      }
+  
+      const responseData = await response.json();
+      console.log('Response:', responseData);
+      // Perform actions with the response data
+  
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const url = "https://myworklm.com/afrowatch/api/afrowatch_api_admin.php";
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +54,11 @@ function MovieForm() {
     e.preventDefault();
     // Perform actions with movieInfo, e.g., submit to server, etc.
     console.log(movieInfo);
+    postData(url, {
+      movieFile: 'movie.mp4',
+      trailer: 'trailer.mp4',
+      movieName: 'Example Movie',
+      })
   };
 
   return (
@@ -49,6 +85,29 @@ function MovieForm() {
             required
           />
         </label>
+        <br />
+        <label>
+          Image:
+          <input
+            type="file"
+            name="trailer"
+            value={movieInfo.Image}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Status:
+          <input
+            type="text"
+            name="movieName"
+            value={movieInfo.movieName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
         <br />
         <label>
           Movie Name:

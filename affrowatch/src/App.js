@@ -5,7 +5,7 @@ import  MovieForm from './Movie'
 
 
 const App = () => {
-  const [loggedin, setLoggedin] = useState(false)
+  const [loggedin, setLoggedin] = useState(true)
 
   return (
     <div>
